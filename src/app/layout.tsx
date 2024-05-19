@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Provider from "./components/Provider";
-import TopNav from "./components/navbar/TopNav";
+import Provider from "../components/Provider";
+import TopNav from "../components/navbar/TopNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +21,7 @@ export default function RootLayout({
       <body>
         <Provider>
           <TopNav />
-          <main className='conatiner mx-auto p-10'>
+          <main className='container mx-auto'>
             {children}
           </main>
           

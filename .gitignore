@@ -35,3 +35,7 @@ typings/
 .yarn-integrity
 
 .next
+#local env files
+.env*.local
+.env
+.env.example
