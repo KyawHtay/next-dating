@@ -5,7 +5,9 @@ import { LoginSchema } from "@/lib/schemas/loginSchema";
 import { RegisterSchema, registerSchema } from "@/lib/schemas/registerSchema";
 import bcrypt from 'bcryptjs'
 import { AuthError, User } from "next-auth";
-import { signIn } from "@/auth";
+import { signIn,signOut } from "@/auth";
+
+
 
 
 export async function sighInUser(data: LoginSchema): Promise<ActionResult<string>>{
@@ -39,6 +41,11 @@ export async function sighInUser(data: LoginSchema): Promise<ActionResult<string
 
     }
 
+}
+
+export async function signOutUser() {
+    await signOut({redirectTo:'/'})
+    
 }
 
 export async function registerUser(data:RegisterSchema):Promise<ActionResult<User>>{

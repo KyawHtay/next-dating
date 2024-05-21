@@ -1,4 +1,4 @@
-'use client'
+
 import { auth } from "@/auth";
 import { Button, Link } from "@nextui-org/react";
 import { signOut } from "next-auth/react";
@@ -14,13 +14,16 @@ export default async function Home() {
       {session?(
         <div>
           <pre>{JSON.stringify(session,null,2)}</pre>
-          <form>
+          <form action={async ()=>{
+          'use server';
+          await signOut()}}>
           <Button 
             type='submit'
             color='primary' 
             variant='bordered' 
             startContent={<FaRegSmile size={20}/>}
           >
+             
             
         Sign Out
 
