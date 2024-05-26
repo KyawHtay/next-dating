@@ -23,7 +23,7 @@ export default async function TopNav() {
 
             <BsHearts  color='red' size={40} className='text-gray-200'/>
             <div className='font-bold text-3xl flex'>
-                <span className='text-gray-900'>Next</span>
+                <span className='text-gray-900'>Your</span>
                 <span className='text-gray-200'>Match</span>
               
             </div>
