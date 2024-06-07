@@ -5,7 +5,7 @@ import { LoginSchema } from "@/lib/schemas/loginSchema";
 import { RegisterSchema, registerSchema } from "@/lib/schemas/registerSchema";
 import bcrypt from 'bcryptjs'
 import { AuthError, User } from "next-auth";
-import { signIn,signOut } from "@/auth";
+import { auth, signIn,signOut } from "@/auth";
 
 
 
@@ -85,4 +85,14 @@ export async function registerUser(data:RegisterSchema):Promise<ActionResult<Use
 
 export async function getUserByEmail(email:string){
     return prisma.user.findUnique({where: {email}});
+}
+
+export async function getAuthUserId(){
+    const session = await auth();
+    const userId = session?.user?.id;
+
+    if(!userId) throw new Error('Unauthroised');
+    console.log(userId);
+    return userId;
+
 }
