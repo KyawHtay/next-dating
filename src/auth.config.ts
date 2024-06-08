@@ -19,7 +19,7 @@ export default { providers: [Credential({
             
             
             const user= await getUserByEmail(email);
-            console.log(user);
+            //console.log(user);
 
             if(!user || !(await compare(password,user.passwordHash))) return null;
 
