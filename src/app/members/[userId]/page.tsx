@@ -9,14 +9,13 @@ export default async function MemberDetailedPage({params}:{params:{userId:string
     
   return (
     <>
-      <CardHeader className='text-2xl font-semibold text-secondary'>
-        Profile
-      </CardHeader>
-      <Divider/>
-      <CardBody>
-        {member.description}
-      </CardBody>
-
+        <CardHeader className='text-2xl font-semibold text-secondary'>
+          Profile
+        </CardHeader>
+        <Divider/>
+        <CardBody>
+          {member.description}
+        </CardBody>
     </>
   )
 }

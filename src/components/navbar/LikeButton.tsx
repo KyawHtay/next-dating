@@ -14,7 +14,7 @@ export default function LikeButton({targetId,hasLiked}: Props) {
     const router = useRouter();
 
     async function toogleLike(){
-      console.log(targetId);
+      //console.log(targetId);
         await toggleLikeMember(targetId,hasLiked);
         router.refresh();
     }

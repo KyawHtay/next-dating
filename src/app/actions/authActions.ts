@@ -20,7 +20,7 @@ export async function sighInUser(data: LoginSchema): Promise<ActionResult<string
             redirect: false
         })
 
-        console.log(result)
+       // console.log(result)
 
         return {status:'success',data:'Logged in'}
 
@@ -92,7 +92,7 @@ export async function getAuthUserId(){
     const userId = session?.user?.id;
 
     if(!userId) throw new Error('Unauthroised');
-    console.log(userId);
+    //console.log(userId);
     return userId;
 
 }
