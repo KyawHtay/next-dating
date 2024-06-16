@@ -15,14 +15,14 @@ export default async function MemeberEditPage() {
     if(!member) return  notFound();
   return (
     <>
-    <CardHeader className='text-2xl font-semibold text-secondary'>
-      Profile
-    </CardHeader>
-    <Divider/>
-    <CardBody>
-        <EditForm member={member} />
-     
-    </CardBody>
+      <CardHeader className='text-2xl font-semibold text-secondary'>
+        Profile
+      </CardHeader>
+      <Divider/>
+      <CardBody>
+          <EditForm member={member} />
+      
+      </CardBody>
 </>
   )
 }

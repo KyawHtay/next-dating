@@ -1,11 +1,14 @@
 'use client';
 import { updateMemberProfile } from '@/app/actions/userActions';
 import { MemberEditSchema, memberEditSchema } from '@/lib/schemas/memberEditScheme';
+import { handleFormServerErrors } from '@/lib/util';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Input, Textarea } from '@nextui-org/react';
+import { Button, Input, Textarea, user } from '@nextui-org/react';
 import { Member } from '@prisma/client'
+import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 type Props={
     member: Member
@@ -13,9 +16,10 @@ type Props={
 
 
 function EditForm({member}:Props) {
-  const {register,handleSubmit,reset,
+  const router = useRouter();
+  const {register,handleSubmit,reset, setError,
       formState:{isValid,isDirty,isSubmitting,errors}} = useForm<MemberEditSchema>({
-     resolver: zodResolver(memberEditSchema),
+      resolver: zodResolver(memberEditSchema),
      mode: 'onTouched'
   });
 
@@ -34,6 +38,13 @@ useEffect(()=>{
 
   const onSubmit =async (data:MemberEditSchema)=>{
     const result = await updateMemberProfile(data);
+    if(result.status==='success'){
+      toast.success('Profile updated');
+      router.refresh();
+      reset({...data})
+    } else {
+      handleFormServerErrors(result,setError)
+    }
   }
   return (
    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col space-y-4'>
@@ -46,7 +57,7 @@ useEffect(()=>{
       errorMessage={errors.name?.message}
     />
      <Textarea 
-        label='Name'
+        label='Description'
         variant='bordered'
         {...register('description')}
         defaultValue={member.description}
@@ -72,11 +83,14 @@ useEffect(()=>{
           errorMessage={errors.country?.message}
       />
       </div>
+      {errors.root?.serverError &&(
+            <p className='text-danger text-sm'>{errors.root.serverError.message}</p>
+        )}
       <Button 
           type='submit'
           className='flex self-end'
           variant='solid'
-          isDisabled={!isValid || isDirty}
+          isDisabled={!isValid || !isDirty}
           isLoading={isSubmitting}
           color='secondary'>
         Update Profile
