@@ -1,4 +1,5 @@
 'use client';
+import { updateMemberProfile } from '@/app/actions/userActions';
 import { MemberEditSchema, memberEditSchema } from '@/lib/schemas/memberEditScheme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Textarea } from '@nextui-org/react';
@@ -31,8 +32,8 @@ useEffect(()=>{
 
 },[member,reset])
 
-  const onSubmit =(data:MemberEditSchema)=>{
-    console.log(data)
+  const onSubmit =async (data:MemberEditSchema)=>{
+    const result = await updateMemberProfile(data);
   }
   return (
    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col space-y-4'>
