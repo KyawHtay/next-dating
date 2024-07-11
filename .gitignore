@@ -39,3 +39,5 @@ typings/
 .env*.local
 .env
 .env.example
+
+build
