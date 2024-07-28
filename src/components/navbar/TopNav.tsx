@@ -37,7 +37,7 @@ export default async function TopNav() {
             <NavLink  href='/messages' label='Messages'/>
         </NavbarContent>
         <NavbarContent justify='end'>
-            {session?.user? (<UserMenu user={session.user} />):(
+            {userInfo? (<UserMenu userInfo={userInfo} />):(
                 <>
                  <Button as={Link} href='/login' variant='bordered' className='text-white'>Login</Button>
                  <Button as={Link} href='/register'  variant='bordered' className='text-white'>Registered</Button>

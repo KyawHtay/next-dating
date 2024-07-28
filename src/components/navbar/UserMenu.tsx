@@ -1,15 +1,16 @@
 'use client'
 import { signOutUser } from '@/app/actions/authActions'
+import { transformImageUrl } from '@/lib/util'
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, Link } from '@nextui-org/react'
 import { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import React from 'react'
 
 type Props ={
-    user: Session['user']
+    userInfo: {name:string | null;image:string| null} | null
 }
 
-function UserMenu({user}:Props) {
+function UserMenu({userInfo}:Props) {
   return (<>
    <Dropdown placement='bottom-end'>
         <DropdownTrigger>
@@ -18,15 +19,15 @@ function UserMenu({user}:Props) {
                 as='button'
                 className='transition-transform'
                 color='secondary'
-                name={user?.name || 'user avatar'}
+                name={userInfo?.name || 'user avatar'}
                 size="sm"
-                src={user?.image || '/images/user.png'}
+                src={transformImageUrl(userInfo?.image) || '/images/user.png'}
             />
         </DropdownTrigger>
         <DropdownMenu variant='flat' aria-label='User actions menu'>
             <DropdownSection showDivider>
                 <DropdownItem isReadOnly as='span' className='h-14 flex flex-row' aria-label='username'>
-                    Signed In as {user?.name}
+                    Signed In as {userInfo?.name}
                 </DropdownItem>
             </DropdownSection>
             <DropdownItem as={Link} href='/members/edit'>
