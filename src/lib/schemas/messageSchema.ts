@@ -6,4 +6,4 @@ export const messageSchema = z.object({
     })
 })
 
-export type messageSchema = z.infer<typeof messageSchema>
+export type MessageSchema = z.infer<typeof messageSchema>
